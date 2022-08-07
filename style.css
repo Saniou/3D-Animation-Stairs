@@ -1,0 +1,112 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#389450,#245932);
+    overflow: hidden;
+}
+
+.stairs{
+    position: relative;
+    width: 500px;
+    height: 300px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(250deg);
+    animation: animate 10s linear infinite;
+}
+
+@keyframes animate {
+    0% {
+        transform: rotateX(-30deg) rotateY(0deg);
+    }
+    
+    100%{
+        transform: rotateX(-30deg) rotateY(360deg);
+    }
+}
+
+.base{
+    position: absolute;
+    top: 0;
+    left: 60px;
+    width: 360px;
+    height: 300px;
+    background: #074a17;
+    transform: rotateX(90deg) translateZ(-150px) scale(1.25);
+    filter: blur(20px);
+    opacity: 0.5;
+}
+
+.step{
+    position: absolute;
+    left: calc(60px * var(--j));
+    width: 60px;
+    bottom: 0;
+    background:#0a6920;
+    height: calc(60px * var(--j));
+    transform-style: preserve-3d;
+}
+
+.step::before{
+    content: '';
+    position: absolute;
+    background: #074a17;
+    top: 0;
+    left: 0;
+    width: 60px;
+    height: 300px;
+    transform: rotateX(90deg) translateZ(150px);
+    transition: 0.5s;
+}
+
+.step:hover:before{
+    background: #389450;
+    transform: 0.5s;
+    cursor: pointer;
+}
+
+.step::after{
+    content: '';
+    position: absolute;
+    background: #0f5e22;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 60px;
+    transform: rotateY(90deg) translateZ(-150px);
+}
+
+.stairs .step i{
+    position: absolute;
+    display: block;
+    width: 60px;
+    height: 100%;
+    background: #0f5e22;   
+    transform-style: preserve-3d;
+}
+
+.stairs .step i:nth-child(1){
+    transform: translateZ(150px);
+}
+
+.stairs .step i:nth-child(2){
+    transform: translateZ(-150px);
+}
+
+.stairs .step:last-child i:nth-child(2)::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    height: 100%;
+    background: #185426;
+    transform: rotateY(90deg) translate3d(-150px, 0, -90px);
+}
